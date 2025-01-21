@@ -1,0 +1,22 @@
+{
+  "name": "@gocoder/remark-obsidian-links",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "a remark plugin that converts obsidian internal links into common links",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "remark",
+    "obsidian",
+    "internal",
+    "links"
+  ],
+  "author": "GoCoder <gocoder7@gmail.com> (https://www.gocoder.xyz)",
+  "license": "MIT",
+  "homepage": ".",
+  "devDependencies": {
+    "unist-util-visit": "^5.0.0"
+  }
+}
