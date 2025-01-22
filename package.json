@@ -1,7 +1,7 @@
 {
   "name": "@gocoder/remark-obsidian-links",
   "type": "module",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "a remark plugin that converts obsidian internal links into common links",
   "main": "index.js",
   "scripts": {
