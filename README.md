@@ -23,13 +23,13 @@ you can set this at `obsidian > setting(preferences) > Files & Links > New link 
 ### only id
 
 ````md
-- from
+- source
 
 ```md
 [[#Section 2]]
 ```
 
-- to
+- into
 
 ```html
 <a href="#section-2">Section 2</a>
@@ -41,43 +41,44 @@ you can set this at `obsidian > setting(preferences) > Files & Links > New link 
 ### only link
 
 ````md
-- from
+- source
 
 ```md
-[[src/posts/my-post]]
+[[src/posts/1. my post]]
 ```
 
-- to
+- into
 
 ```html
-<a href="src/posts/my-post">src/posts/my-post</a>
+<a href="src/posts/1-my-post">src/posts/1-my-post</a>
 ```
 
-- or to (options.linkPrefix = ['src', ''])
+- or into (options.linkPrefix = ['src', ''])
 
 ```html
-<a href="/posts/my-post">/posts/my-post</a>
+<a href="/posts/1-my-post">/posts/1-my-post</a>
 ```
 ````
 
+- the **filename** will be slugified with [default slugify function](#slugify), but you can use your own by passing through `options.slugify`
 - you can replace some part of your link path with `options.linkPrefix`
 
 ### link with label
 
 ````md
-- from
+- source
 
 ```md
 [[src/posts/my-post|My Post]]
 ```
 
-- to
+- into
 
 ```html
 <a href="src/posts/my-post">My Post</a>
 ```
 
-- or to (options.linkPrefix = ['src', ''])
+- or into (options.linkPrefix = ['src', ''])
 
 ```html
 <a href="/posts/my-post">My Post</a>
@@ -87,19 +88,19 @@ you can set this at `obsidian > setting(preferences) > Files & Links > New link 
 ### link with id & label
 
 ````md
-- from
+- source
 
 ```md
 [[src/posts/my-post#Section 2|My Post Section 2]]
 ```
 
-- to
+- into
 
 ```html
 <a href="src/posts/my-post#section-2">My Post Section 2</a>
 ```
 
-- or to (options.linkPrefix = ['src', ''])
+- or into (options.linkPrefix = ['src', ''])
 
 ```html
 <a href="/posts/my-post#section-2">My Post Section 2</a>
@@ -156,11 +157,15 @@ you can set this at `obsidian > setting(preferences) > Files & Links > New link 
 
 # Options
 
-| Option          | Description                                                                                                                                                                                                                    | Default value       |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
-| **linkPrefix**  | if exist, _replace path_ for the **link**<br>it takes an _string array_ which length is 2,<br>and its elements are `from` and `to` consequently<br>e.g. `{linkPrefix: ['src', '']}`<br>=> remove `'src'` from the path         | `[]`                |
-| **imagePrefix** | if exist, _replace path_ for the **image**<br>it takes an _string array_ which length is 2,<br>and its elements are `from` and `to` consequently<br>e.g. `{imagePrefix: ['static', '']}`<br>=> remove `'static'` from the path | `[]`                |
-| **slugify**     | if exist, replace the [default slugify function](#slugify) that _slugify_ the **id**                                                                                                                                           | [slugify](#slugify) |
+| Option          | Description                                                                                                                                                                                                                                                          | Default value       |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| **imagePrefix** | if exist, _replace path_ for the **image**.<br>it takes an _string array_ which length is 2,<br>and its elements are `from` and `to` consequently.<br>e.g. `{imagePrefix: ['static', '']}`<br>=> remove `'static'` from the path<br>type: `string[2]` \| `undefined` | `[]`                |
+| **linkPrefix**  | if exist, _replace path_ for the **link**.<br>it takes an _string array_ which length is 2,<br>and its elements are `from` and `to` consequently.<br>e.g. `{linkPrefix: ['src', '']}`<br>=> remove `'src'` from the path.<br>type: `string[2]` \| undefined          | `[]`                |
+| **linkClass**   | the class added to `<a>` element.<br>type : `string` \| `string[]` \| `undefined`                                                                                                                                                                                    | `"link-page`        |
+| **idClass**     | the class added to `<a>` element for id link (e.g. `[[#section2]]`) instead of the **linkClass** one.<br>type: `string` \| `string[]` \| `undefined`                                                                                                                 | `"link-id"`         |
+| **slugify**     | if exist, replace the [default slugify function](#slugify) that _slugify_ the **id**.<br>type: `(string) => string` \| `"none"` \| `undefined`                                                                                                                       | [slugify](#slugify) |
+
+- if you need any **additional options**, feel free to leave an **issue**!
 
 ## slugify
 
