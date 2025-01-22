@@ -15,7 +15,7 @@
   ],
   "author": "GoCoder <gocoder7@gmail.com> (https://www.gocoder.xyz)",
   "license": "MIT",
-  "homepage": ".",
+  "homepage": "https://github.com/GoCoder7/remark-obsidian-links",
   "devDependencies": {
     "unist-util-visit": "^5.0.0"
   }
