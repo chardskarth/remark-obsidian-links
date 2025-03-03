@@ -1,11 +1,16 @@
 {
   "name": "@gocoder/remark-obsidian-links",
-  "type": "module",
   "version": "1.1.5",
   "description": "a remark plugin that converts obsidian internal links into common links",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "tsc"
   },
   "keywords": [
     "remark",
@@ -15,8 +20,13 @@
   ],
   "author": "GoCoder <gocoder7@gmail.com> (https://www.gocoder.xyz)",
   "license": "MIT",
+  "repository": "github:gocoder7/remark-obsidian-links",
   "homepage": "https://www.gocoder.xyz",
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
+    "@types/mdast": "^4.0.4",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
     "unist-util-visit": "^5.0.0"
   }
 }
