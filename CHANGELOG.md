@@ -1,5 +1,11 @@
 # @gocoder/remark-obsidian-links
 
+## 1.2.4
+
+### Patch Changes
+
+- f6584a6: fix critical bugs
+
 ## 1.2.3
 
 ### Patch Changes
