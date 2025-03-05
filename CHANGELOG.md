@@ -1,5 +1,11 @@
 # @gocoder/remark-obsidian-links
 
+## 1.2.3
+
+### Patch Changes
+
+-
+
 ## 1.2.2
 
 ### Patch Changes
