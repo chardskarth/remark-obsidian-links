@@ -1,3 +1,0 @@
----
-"remark-obsidian-links": patch
----

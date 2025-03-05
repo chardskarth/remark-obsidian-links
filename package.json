@@ -1,6 +1,6 @@
 {
   "name": "remark-obsidian-links",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "a remark plugin that converts obsidian internal links into common links",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
