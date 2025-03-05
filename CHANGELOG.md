@@ -1,5 +1,11 @@
 # @gocoder/remark-obsidian-links
 
+## 1.2.5
+
+### Patch Changes
+
+- d559c70: remove 'coverage' directory from beeing tracked
+
 ## 1.2.4
 
 ### Patch Changes
