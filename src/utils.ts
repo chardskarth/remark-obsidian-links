@@ -14,11 +14,11 @@ export const slugfiyFileNameBase = (
   let fileName = urlArr.pop()!;
   let ext;
   if (imgExts.some((ext) => url.endsWith(ext))) {
-    const fileNameArr = url.split(".");
+    const fileNameArr = fileName.split(".");
     ext = fileNameArr.pop();
-    url = fileNameArr.join(".");
+    fileName = fileNameArr.join(".");
   }
-  url = `${slugify(url)}${ext ? `.${ext}` : ""}`;
+  url = `${slugify(fileName)}${ext ? `.${ext}` : ""}`;
   urlArr.push(url);
   return urlArr.join("/");
 };

@@ -1,7 +1,7 @@
 import { visit } from "unist-util-visit";
 import { ObsidianLinkOptions } from "./types.js";
 import { PhrasingContent, Root } from "mdast";
-import { defaultSlugify, slugfiyFileNameBase } from "./functions.js";
+import { defaultSlugify, slugfiyFileNameBase } from "./utils.js";
 
 export default function remarkConvertObsidianInternalLinks(
   options?: ObsidianLinkOptions
@@ -40,6 +40,7 @@ export default function remarkConvertObsidianInternalLinks(
            */
           const nextEl1 = p.children[i + 1];
           const nextEl2 = p.children[i + 2];
+          // console.log(`textBeforeLinkVal: ${textBeforeLinkVal}`);
           if (
             (textBeforeLinkVal.endsWith("[") ||
               textBeforeLinkVal.endsWith("![")) &&
@@ -51,15 +52,14 @@ export default function remarkConvertObsidianInternalLinks(
             wasTarget = true;
 
             // remove prefix `[` or `![`
-            if (textBeforeLinkVal.endsWith("[")) {
-              // case: link
-              textBeforeLinkVal = textBeforeLinkVal.slice(0, -1);
-            } else {
+            if (textBeforeLinkVal.endsWith("![")) {
               // case: image
               forImage = true;
               textBeforeLinkVal = textBeforeLinkVal.slice(0, -2);
+            } else {
+              // case: link
+              textBeforeLinkVal = textBeforeLinkVal.slice(0, -1);
             }
-
             // set link url & url text
             let url = nextEl1.label ?? "";
             let urlText,
@@ -83,9 +83,17 @@ export default function remarkConvertObsidianInternalLinks(
               url = url + "#" + slugify(id);
             }
 
-            if (!forImage && linkPattern && linkSubst) {
+            if (
+              !forImage &&
+              typeof linkPattern === "string" &&
+              typeof linkSubst === "string"
+            ) {
               url = url.replace(linkPattern, linkSubst);
-            } else if (forImage && imagePattern && imageSubst) {
+            } else if (
+              forImage &&
+              typeof imagePattern === "string" &&
+              typeof imageSubst === "string"
+            ) {
               url = url.replace(imagePattern, imageSubst);
             }
 
@@ -129,7 +137,11 @@ export default function remarkConvertObsidianInternalLinks(
             skipIndex = i + 2;
           } else {
             wasTarget = false;
-            substChildren.push(node);
+            // if was Target, the ']' was removed
+            substChildren.push({
+              type: "text",
+              value: textBeforeLinkVal,
+            });
           }
         } else {
           wasTarget = false;
