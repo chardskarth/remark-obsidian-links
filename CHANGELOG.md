@@ -1,5 +1,11 @@
 # @gocoder/remark-obsidian-links
 
+## 1.2.6
+
+### Patch Changes
+
+- ef0419a: remove scope from package name
+
 ## 1.2.5
 
 ### Patch Changes

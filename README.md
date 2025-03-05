@@ -8,7 +8,11 @@ a [remark plugin](https://github.com/remarkjs/remark/blob/main/doc/plugins.md) t
 # Init
 
 ```shell
-pnpm i -D @gocoder/remark-obsidian-links
+pnpm i -D remark-obsidian-links
+```
+
+```js
+import convertObsidianLinks from "remark-obsidian-links"; // exported as default
 ```
 
 ## Obsidian Setting
