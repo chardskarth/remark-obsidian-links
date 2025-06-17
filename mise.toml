@@ -1,0 +1,4 @@
+[tools]
+node = '20.13.0'
+"npm:pnpm" = "latest"
+

@@ -28,43 +28,20 @@ export default function remarkConvertObsidianInternalLinks(
           let forImage = false;
           let textBeforeLinkVal = node.value;
 
-          // remove prefix ']' from Text here if it was a target
-          if (wasTarget) {
-            textBeforeLinkVal = textBeforeLinkVal.slice(1);
-            wasTarget = false;
+
+          if(textBeforeLinkVal.startsWith("![[") && textBeforeLinkVal.endsWith("]]")) {
+            forImage = true;
+            textBeforeLinkVal = textBeforeLinkVal.slice(3).slice(0,-2)
+          } else if (textBeforeLinkVal.startsWith("[[") && textBeforeLinkVal.endsWith("]]")) {
+            wasTarget = true;
+            textBeforeLinkVal = textBeforeLinkVal.slice(2).slice(0,-2)
           }
 
-          /** find [[link]] or ![[link]].
-           * [[link]] will be parsed as
-           * text.value('*[') + linkReference.label('link') + text.value(']*')
-           */
-          const nextEl1 = p.children[i + 1];
-          const nextEl2 = p.children[i + 2];
-          // console.log(`textBeforeLinkVal: ${textBeforeLinkVal}`);
-          if (
-            (textBeforeLinkVal.endsWith("[") ||
-              textBeforeLinkVal.endsWith("![")) &&
-            nextEl1?.type === "linkReference" &&
-            nextEl2?.type === "text" &&
-            nextEl2.value.startsWith("]")
-          ) {
-            // set target predicate flag
-            wasTarget = true;
-
-            // remove prefix `[` or `![`
-            if (textBeforeLinkVal.endsWith("![")) {
-              // case: image
-              forImage = true;
-              textBeforeLinkVal = textBeforeLinkVal.slice(0, -2);
-            } else {
-              // case: link
-              textBeforeLinkVal = textBeforeLinkVal.slice(0, -1);
-            }
+          if(forImage || wasTarget) {
             // set link url & url text
-            let url = nextEl1.label ?? "";
-            let urlText,
-              id,
-              isIdLink = false;
+            let url = textBeforeLinkVal;
+            let urlText, id, isIdLink = false;
+
             if (url.includes("|")) {
               [url, urlText] = url.split("|") as [string, string];
             }
@@ -106,10 +83,10 @@ export default function remarkConvertObsidianInternalLinks(
             }
 
             // set subst children
-            substChildren.push({
-              type: "text",
-              value: textBeforeLinkVal,
-            });
+            // substChildren.push({
+            //   type: "text",
+            //   value: textBeforeLinkVal,
+            // });
             if (forImage) {
               substChildren.push({
                 type: "image",
