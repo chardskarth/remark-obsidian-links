@@ -66,9 +66,17 @@ export default function remarkConvertObsidianInternalLinks(
               typeof linkSubst === "string"
             ) {
               url = url.replace(linkPattern, linkSubst);
+            } else if (!forImage && (linkPattern instanceof RegExp) && typeof linkSubst === "string") {
+              url = url.replace(linkPattern, linkSubst);
             } else if (
               forImage &&
               typeof imagePattern === "string" &&
+              typeof imageSubst === "string"
+            ) {
+              url = url.replace(imagePattern, imageSubst);
+            } else if (
+              forImage &&
+              imagePattern instanceof RegExp &&
               typeof imageSubst === "string"
             ) {
               url = url.replace(imagePattern, imageSubst);
